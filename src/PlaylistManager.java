@@ -57,6 +57,9 @@ public class PlaylistManager {
     public String searchSongByTitle(String title) {
         Song target = null;
 
+        if (title == null || title.trim().isEmpty()) {
+            return "searchSongByTitle: The title of the song you want to search cannot be a null or empty string.";
+        }
         for (Song song : this.playlist) {
             if (song == null) {
                 break;
@@ -70,7 +73,7 @@ public class PlaylistManager {
             return "searchSongByTitle: No song found with title \"" + title + "\".";
         }
 
-        return "Target song was found, and it is:\n" + target;
+        return "Target song with title \"" + title + "\" was found, and it is:\n" + target;
     }
 
     // Sorting feature: alphabetical by title ascending (A -> Z)
