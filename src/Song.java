@@ -19,16 +19,16 @@ public class Song {
             return "validateSong: The song ID must be a positive integer.";
         }
         if (this.title == null || this.title.trim().isEmpty()) {
-            return "validateSong: The song title cannot be empty.";
+            return "validateSong: The song title cannot be a null or empty string.";
         }
-        if (this.artist == null || this.artist.trim().isEmpty()) {
-            return "validateSong: The song artist cannot be empty.";
+        if (this.artist == null) {
+            return "validateSong: The song artist cannot be a null string.";
         }
         if (this.duration <= 0) {
             return "validateSong: The song duration must be a positive number.";
         }
-        if (this.genre == null || this.genre.trim().isEmpty()) {
-            return "validateSong: The song genre cannot be empty.";
+        if (this.genre == null) {
+            return "validateSong: The song genre cannot be a null string.";
         }
         return null;
     }
