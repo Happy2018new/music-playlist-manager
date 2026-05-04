@@ -88,8 +88,8 @@ public class Song {
     public String toString() {
         return "ID: " + id
                 + " | Title: " + title
-                + " | Artist: " + artist
+                + " | Artist: " + (artist.isEmpty() ? "Unknown Artist" : artist)
                 + " | Duration: " + formatDuration(duration)
-                + " | Genre: " + genre;
+                + " | Genre: " + (genre.isEmpty() ? "Unknown Genre" : genre);
     }
 }
