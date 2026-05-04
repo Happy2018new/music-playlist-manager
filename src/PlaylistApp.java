@@ -1,4 +1,6 @@
+
 public class PlaylistApp {
+
     public static void main(String[] args) {
         PlaylistManager manager = new PlaylistManager();
         new PlaylistGUI(manager);

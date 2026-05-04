@@ -1,4 +1,6 @@
+
 public class PlaylistManager {
+
     private static final int MAX_SONGS = 10;
 
     // Must not change: fixed-size array storage
@@ -6,32 +8,86 @@ public class PlaylistManager {
     private int count = 0;
 
     public String addSong(Song song) {
-        // To do: Complete the addSong() method
+        String validationError;
 
-        return "Song added:\n" + song; // song is the song added to the playlist.
+        if (this.count >= MAX_SONGS) {
+            return "addSong: You already put " + MAX_SONGS + " songs and now the playlist is full! Cannot put anymore!";
+        }
+        if ((validationError = song.validateSong()) != null) {
+            return "addSong: " + validationError;
+        }
+        for (Song element : this.playlist) {
+            if (element == null) {
+                break;
+            }
+            if (element.getSongID() == song.getSongID()) {
+                return "addSong: A song with ID "
+                        + element.getSongID() + " was already existing! "
+                        + "Please assign a different ID to the new song.";
+            }
+        }
+
+        this.playlist[this.count] = song;
+        this.count++;
+        return "Song added:\n" + song;
     }
 
     public String deleteSongById(int id) {
-        // To do: Complete the deteSongById() method
+        int indexToRemove = -1;
+        Song removed = null;
 
-        return "Deleted:\n" + removed; // removed is the song deleted.
+        for (int i = 0; i < this.count; i++) {
+            if (this.playlist[i].getSongID() == id) {
+                indexToRemove = i;
+                removed = this.playlist[i];
+                break;
+            }
+        }
+        if (indexToRemove == -1 || removed == null) {
+            return "deleteSongById: Target song with ID " + id + " was not found.";
+        }
+
+        for (int i = indexToRemove; i <= this.count - 2; i++) {
+            this.playlist[i] = this.playlist[i + 1];
+        }
+        this.playlist[this.count - 1] = null;
+        this.count--;
+
+        return "Song deleted:\n" + removed;
     }
 
     public String searchSongByTitle(String title) {
-        // To do: Check if the title is null
+        Song target = null;
 
-        // To do: Check if the title is found in the playlist
+        for (Song song : this.playlist) {
+            if (song == null) {
+                break;
+            }
+            if (song.getSongTitle().equals(title)) {
+                target = song;
+                break;
+            }
+        }
+        if (target == null) {
+            return "searchSongByTitle: No song found with title \"" + title + "\".";
+        }
 
-        // To do: Check if the title is not found in the playlist
-
-        return "No song found with title \"" + target + "\"."; //
+        return "Target song was found, and it is:\n" + target;
     }
 
     // Sorting feature: alphabetical by title ascending (A -> Z)
     // No built-in sorting allowed
     public String sortSongs() {
-        // To do: Complete sorting()
-
+        for (int i = 0; i < this.count; i++) {
+            for (int j = i; j < this.count; j++) {
+                Song left = this.playlist[i];
+                Song right = this.playlist[j];
+                if (left.getSongTitle().compareTo(right.getSongTitle()) > 0) {
+                    this.playlist[i] = right;
+                    this.playlist[j] = left;
+                }
+            }
+        }
         return "Playlist sorted by title.\n\n" + listAllSongs();
     }
 
@@ -46,8 +102,4 @@ public class PlaylistManager {
         }
         return sb.toString();
     }
-
-    // ---------- Helper methods ----- //
-    // You can add any helper methods, if needed.
-
 }

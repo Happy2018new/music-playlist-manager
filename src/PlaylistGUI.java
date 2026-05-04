@@ -1,7 +1,8 @@
-import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 // The GUI class extends JFrame and implements ActionListener
 // so one single actionPerformed() method can handle all button events.
@@ -25,6 +26,7 @@ public class PlaylistGUI extends JFrame implements ActionListener {
     private JButton addButton;
     private JButton deleteButton;
     private JButton searchButton;
+    private JButton sortButton;
     private JButton listButton;
     private JButton clearButton;
 
@@ -37,7 +39,7 @@ public class PlaylistGUI extends JFrame implements ActionListener {
         setSize(750, 450);
         setLocationRelativeTo(null); // Center window
 
-        buildUI(); // Build graphical components
+        buildUI();  // Build graphical components
         setVisible(true);
     }
 
@@ -74,6 +76,7 @@ public class PlaylistGUI extends JFrame implements ActionListener {
         addButton = new JButton("Add");
         deleteButton = new JButton("Delete (by ID)");
         searchButton = new JButton("Search (by Title)");
+        sortButton = new JButton("Sort (by Title)");
         listButton = new JButton("View All");
         clearButton = new JButton("Clear Output");
 
@@ -82,6 +85,7 @@ public class PlaylistGUI extends JFrame implements ActionListener {
         addButton.addActionListener(this);
         deleteButton.addActionListener(this);
         searchButton.addActionListener(this);
+        sortButton.addActionListener(this);
         listButton.addActionListener(this);
         clearButton.addActionListener(this);
 
@@ -89,6 +93,7 @@ public class PlaylistGUI extends JFrame implements ActionListener {
         buttonPanel.add(addButton);
         buttonPanel.add(deleteButton);
         buttonPanel.add(searchButton);
+        buttonPanel.add(sortButton);
         buttonPanel.add(listButton);
         buttonPanel.add(clearButton);
 
@@ -152,6 +157,10 @@ public class PlaylistGUI extends JFrame implements ActionListener {
         } else if (src == searchButton) {
             String title = titleField.getText();
             outputArea.setText(manager.searchSongByTitle(title));
+
+            // Sort Songs by Title
+        } else if (src == sortButton) {
+            outputArea.setText(manager.sortSongs());
 
             // List All Songs
         } else if (src == listButton) {

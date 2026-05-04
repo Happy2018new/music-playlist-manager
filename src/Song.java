@@ -1,20 +1,85 @@
+
 public class Song {
+
     private int id;
     private String title;
     private String artist;
     private int duration; // seconds
     private String genre;
 
-    // To do: Constructor
+    // Constructor
+    public Song(int id, String title, String artist, int duration, String genre) {
+        this.id = id;
+        this.title = title;
+        this.artist = artist;
+        this.duration = duration;
+        this.genre = genre;
+    }
 
-    // To do: Getters
+    public String validateSong() {
+        if (this.id <= 0) {
+            return "validateSong: The song ID must be a positive integer.";
+        }
+        if (this.title == null || this.title.trim().isEmpty()) {
+            return "validateSong: The song title cannot be empty.";
+        }
+        if (this.artist == null || this.artist.trim().isEmpty()) {
+            return "validateSong: The song artist cannot be empty.";
+        }
+        if (this.duration <= 0) {
+            return "validateSong: The song duration must be a positive number.";
+        }
+        if (this.genre == null || this.genre.trim().isEmpty()) {
+            return "validateSong: The song genre cannot be empty.";
+        }
+        return null;
+    }
 
-    // To do: Setters
+    public int getSongID() {
+        return this.id;
+    }
+
+    public String getSongTitle() {
+        return this.title;
+    }
+
+    public String getSongArtist() {
+        return this.artist;
+    }
+
+    public int getSongDuration() {
+        return this.duration;
+    }
+
+    public String getSongGenre() {
+        return this.genre;
+    }
+
+    public void setSongID(int id) throws Exception {
+        throw new Exception("setSongID: The song ID can not be changed once set.");
+    }
+
+    public void setSongTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSongArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public void setSongDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setSongGenre(String genre) {
+        this.genre = genre;
+    }
 
     // This method converts the seconds into a minute format.
     private String formatDuration(int totalSeconds) {
-        if (totalSeconds < 0)
+        if (totalSeconds < 0) {
             totalSeconds = 0;
+        }
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
         return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
