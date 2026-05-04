@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +6,6 @@ import javax.swing.*;
 // The GUI class extends JFrame and implements ActionListener
 // so one single actionPerformed() method can handle all button events.
 public class PlaylistGUI extends JFrame implements ActionListener {
-
     // Reference to the PlaylistManager (business logic)
     private PlaylistManager manager;
 
@@ -39,7 +37,7 @@ public class PlaylistGUI extends JFrame implements ActionListener {
         setSize(750, 450);
         setLocationRelativeTo(null); // Center window
 
-        buildUI();  // Build graphical components
+        buildUI(); // Build graphical components
         setVisible(true);
     }
 

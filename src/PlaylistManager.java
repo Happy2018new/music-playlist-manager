@@ -1,6 +1,4 @@
-
 public class PlaylistManager {
-
     private static final int MAX_SONGS = 10;
 
     // Must not change: fixed-size array storage
